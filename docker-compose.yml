@@ -28,18 +28,12 @@ services:
     build: 
       context: ./frontend
       target: production
-      args:
-        VITE_API_URL: http://localhost:3001/api
+      #args:
+        #VITE_API_URL: http://localhost:3001/api
         #VITE_API_URL: http://backend:3001/api/ping
         #VITE_API_URL: http://host.docker.internal:3001/api
     ports:
-      #- "80:80"
-      #- "3000:3000"
       - "3000:80"
-    #environment:
-      #VITE_API_URL: http://backend:3001/api
-      #VITE_API_URL: http://localhost:3001/api
-      #VITE_API_URL: http://host.docker.internal:3001/api
 
     depends_on:
       - backend

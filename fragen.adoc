@@ -1,0 +1,7 @@
+## Offene Fragen
+
+### Gibt es einen Unterschied zwischen "Continuous Delivery" und "Continious Deployment", der rechtfertigt, warum wir beide Steps machen? Sind große Teile davon nicht der gleiche Prozess?
+
+### Wenn es einen Unterschied gibt, was ist der Cutoff-Point dazwischen? Laut ChatGPT+Deepseek wohl das Deployment auf DockerHub, aber das benötigt ja eine Versionierung des Images, die laut den Antworten erst im "Continious Deployment" Schritt passiert.
+
+## Beantwortete Fragen

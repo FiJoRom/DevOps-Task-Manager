@@ -15,27 +15,32 @@ services:
 
   backend:
     build: ./backend
-    ports:
-      - "3001:3001"
     environment:
       DATABASE_URL: postgres://admin:admin@postgres:5432/taskmanager
       PORT: 3001
       NODE_ENV: development
+    expose:
+      - "3001"
     depends_on:
       - postgres
 
   frontend:
-    build: 
+    build:
       context: ./frontend
       target: production
-      #args:
-        #VITE_API_URL: http://localhost:3001/api
-        #VITE_API_URL: http://backend:3001/api/ping
-        #VITE_API_URL: http://host.docker.internal:3001/api
-    ports:
-      - "3000:80"
-
+    expose:
+      - "80"
     depends_on:
+      - backend
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - frontend
       - backend
 
 volumes:

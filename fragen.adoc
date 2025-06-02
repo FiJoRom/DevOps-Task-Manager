@@ -1,7 +1,8 @@
 ## Offene Fragen
 
-### Gibt es einen Unterschied zwischen "Continuous Delivery" und "Continious Deployment", der rechtfertigt, warum wir beide Steps machen? Sind große Teile davon nicht der gleiche Prozess?
-
-### Wenn es einen Unterschied gibt, was ist der Cutoff-Point dazwischen? Laut ChatGPT+Deepseek wohl das Deployment auf DockerHub, aber das benötigt ja eine Versionierung des Images, die laut den Antworten erst im "Continious Deployment" Schritt passiert.
-
 ## Beantwortete Fragen
+
+### Was ist eine sinnvolle Aufteilung für die Frontend/Backend Komponenten in den Workflows?
+-> Jeweils ein eigener workflow; dann nur ein job, setup, lint, test, sonarqube -> grün für deliver, docker image bauen und registry
+
+### Gibt es einen Unterschied zwischen "Continuous Delivery" und "Continious Deployment", der rechtfertigt, warum wir beide Steps machen? Sind große Teile davon nicht der gleiche Prozess?

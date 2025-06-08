@@ -67,7 +67,7 @@ jobs:
       - name: Extract version
         id: increment_version
         run: |
-          VERSION_FILE="frontend/version.txt"
+          VERSION_FILE="version.txt"
 
           # Lade existierende Version oder setze 0.0.0
           if [ -f "$VERSION_FILE" ]; then
@@ -115,12 +115,12 @@ jobs:
             git config --global user.name 'github-actions[bot]'
             git config --global user.email 'github-actions[bot]@users.noreply.github.com'
             git commit -m "Update frontend-version to $NEW_VERSION"
-            git push
+            git push origin $BRANCH_NAME --push-option=ci-skip
       
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ steps.version.outputs.new_version }} .
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ steps.increment_version.outputs.version }}
 
       - name: Push Docker image
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ steps.version.outputs.new_version }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ steps.increment_version.outputs.version }}

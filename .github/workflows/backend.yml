@@ -64,7 +64,7 @@ jobs:
       - name: Extract version
         id: increment_version
         run: |
-          VERSION_FILE="version.txt"
+          VERSION_FILE="backend/version.txt"
 
           # Lade existierende Version oder setze 0.0.0
           if [ -f "$VERSION_FILE" ]; then
@@ -87,6 +87,7 @@ jobs:
 
           new_version="$major.$minor.$patch"
           echo $new_version > "$VERSION_FILE"
+          git add "$VERSION_FILE"
 
           echo "version=$new_version" >> $GITHUB_OUTPUT
 
@@ -105,13 +106,13 @@ jobs:
           NEW_VERSION: ${{ steps.increment_version.outputs.version }}
           BRANCH_NAME: ${{ steps.branch-name.outputs.branch }}
         run: |
+          cd backend
+          git add version.txt
+          cd ..
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git checkout $BRANCH_NAME
-          echo "$NEW_VERSION" > version.txt
-          git add version.txt
           git commit -m "Update backend-version to $NEW_VERSION"
-          git push origin $BRANCH_NAME --push-option=ci-skip
+          git push
 
       - name: Build Docker image
         run: |

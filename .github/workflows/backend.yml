@@ -39,7 +39,8 @@ jobs:
       - name: Test (with coverage)
         run: npm run test:coverage
 
-      ### SonarQube ### 
+      ### SonarQube ###
+      # Version hinzufügen? Dafür müsste der Block nach vorne verschobene werden, der die Versionierung hochzählt 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v4
         with:

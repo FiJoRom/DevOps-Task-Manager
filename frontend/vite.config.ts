@@ -1,11 +1,20 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   test: {
-    environment: 'jsdom'
-  }
-})
+    environment: 'jsdom',
+    coverage: {
+      provider: 'v8',
+      reporter: ['lcov', 'text-summary', 'text'],
+      reportsDirectory: './coverage',
+    },
+    reporters: ['default', 'vitest-sonar-reporter', 'junit'],
+    outputFile: {
+      'vitest-sonar-reporter': 'test-results/sonar-report.xml',
+      junit: './test-results/junit.xml',
+    },
+  },
+});

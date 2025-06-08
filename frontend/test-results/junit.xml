@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="1" failures="0" errors="0" time="0.0015624">
+    <testsuite name="src/example.test.ts" timestamp="2025-06-08T16:51:31.596Z" hostname="Desktop_Finn" tests="1" failures="0" errors="0" skipped="0" time="0.0015624">
+        <testcase classname="src/example.test.ts" name="Simple test &gt; adds numbers" time="0.0008181">
+        </testcase>
+    </testsuite>
+</testsuites>

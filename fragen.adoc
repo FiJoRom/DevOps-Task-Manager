@@ -2,6 +2,8 @@
 
 ### Ist die Alternative zur Testgeneriung in der Pipeline (inklusive Task usw.), die ich aktuell habe (Ausführen von Befehl, der sich auf Skript bezieht), okay für das Projekt? Gibt es da Vorteile/Nachteile?
 
+### Was gibt man denn alles weiter an SonarQube? Stichwort "Inklusive Ergebnisse aus vorherigen Schritten"
+
 ## Beantwortete Fragen
 
 ### Was ist eine sinnvolle Aufteilung für die Frontend/Backend Komponenten in den Workflows?

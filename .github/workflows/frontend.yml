@@ -21,7 +21,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.ACCESS_TOKEN_GITHUB }}
+          token: ${{ secrets.ACCESS_TOKEN_GITHUB }} # Wichtig, ohne das darf später der automatische Commit der Version nicht gemacht werden!
 
       - uses: actions/setup-node@v4
         with:
@@ -113,7 +113,7 @@ jobs:
             cd ..
             git config --global user.name 'github-actions[bot]'
             git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-            git commit -m "Update frontend-version to $NEW_VERSION"
+            git commit -m "Update frontend-version to $NEW_VERSION [skip ci]"
             git push origin $BRANCH_NAME --push-option=ci-skip
       
       - name: Build Docker image

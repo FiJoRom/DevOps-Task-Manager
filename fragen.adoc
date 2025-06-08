@@ -4,6 +4,8 @@
 
 ### Was gibt man denn alles weiter an SonarQube? Stichwort "Inklusive Ergebnisse aus vorherigen Schritten"
 
+### Gibt es eine bessere Alternative zu der Versionierung durch Update der File von Bot, die ich von meiner letzten eigenen Implementierung einer Versionierung übernommen + angepasst habe?
+
 ## Beantwortete Fragen
 
 ### Was ist eine sinnvolle Aufteilung für die Frontend/Backend Komponenten in den Workflows?

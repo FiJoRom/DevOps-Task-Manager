@@ -22,7 +22,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22 #20? 
+          node-version: 22
 
       - name: Install dependencies
         run: npm ci
@@ -51,7 +51,7 @@ jobs:
       #  env:
       #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
 
-      ### Docker ###
+      ### Docker + Versionierungslogik ###
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -62,7 +62,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Extract version
-        id: version
+        id: increment_version
         run: |
           VERSION_FILE="version.txt"
 
@@ -88,8 +88,31 @@ jobs:
           new_version="$major.$minor.$patch"
           echo $new_version > "$VERSION_FILE"
 
-          echo "new_version=$new_version" >> $GITHUB_OUTPUT
+          echo "version=$new_version" >> $GITHUB_OUTPUT
 
+      - name: Determine branch name
+        id: branch-name
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "branch=${{ github.event.pull_request.base.ref }}" >> $GITHUB_OUTPUT
+          else
+            echo "branch=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and Push Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN_GITHUB }}
+          NEW_VERSION: ${{ steps.increment_version.outputs.version }}
+          BRANCH_NAME: ${{ steps.branch-name.outputs.branch }}
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout $BRANCH_NAME
+          echo "$NEW_VERSION" > version.txt
+          git add version.txt
+          git commit -m "Update backend-version to $NEW_VERSION"
+          git push origin $BRANCH_NAME --push-option=ci-skip
+      
       - name: Build Docker image
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ steps.version.outputs.new_version }} .

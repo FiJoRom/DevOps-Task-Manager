@@ -6,3 +6,6 @@
 -> Jeweils ein eigener workflow; dann nur ein job, setup, lint, test, sonarqube -> grün für deliver, docker image bauen und registry
 
 ### Gibt es einen Unterschied zwischen "Continuous Delivery" und "Continious Deployment", der rechtfertigt, warum wir beide Steps machen? Sind große Teile davon nicht der gleiche Prozess?
+
+### ...
+Root vieler Probleme: Installation im falschen Verzeichnis ausgeführt

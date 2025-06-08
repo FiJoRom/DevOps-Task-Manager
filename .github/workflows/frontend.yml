@@ -109,7 +109,6 @@ jobs:
           NEW_VERSION: ${{ steps.increment_version.outputs.version }}
           BRANCH_NAME: ${{ steps.branch-name.outputs.branch }}
         run: |
-            cd frontend
             git add version.txt
             cd ..
             git config --global user.name 'github-actions[bot]'

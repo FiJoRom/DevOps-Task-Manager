@@ -51,7 +51,7 @@ jobs:
       #  env:
       #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACKEND }}
 
-      ### Docker # Versionierungslogik ###
+      ### Docker # Versionierungslogik ####
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 

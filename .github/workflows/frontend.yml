@@ -119,7 +119,7 @@ jobs:
       
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ steps.increment_version.outputs.version }}
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ steps.increment_version.outputs.version }} .
 
       - name: Push Docker image
         run: |

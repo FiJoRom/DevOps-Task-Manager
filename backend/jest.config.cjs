@@ -10,9 +10,18 @@ module.exports = {
   },
   testPathIgnorePatterns: ["/node_modules/", "/dist/"],
 
-  // 🔽 Coverage-Einstellungen hinzufügen 🔽
+  // 🔽 Coverage-Einstellungen 🔽
   collectCoverage: true,
   coverageDirectory: "coverage",
-  coverageReporters: ["lcov", "text-summary"], // Wichtig für SonarQube
-  coveragePathIgnorePatterns: ["/node_modules/", "/test/"], // Optional: Unwichtige Pfade ignorieren
+  coverageReporters: ["lcov", "text-summary"],
+  coveragePathIgnorePatterns: ["/node_modules/", "/test/"],
+
+  // 🔽 JUnit-Reporter für SonarQube 🔽
+  reporters: [
+    "default",
+    ["jest-junit", {
+      outputDirectory: "test-results",
+      outputName: "junit.xml"
+    }]
+  ],
 };

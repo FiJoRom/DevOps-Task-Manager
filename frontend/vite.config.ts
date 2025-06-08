@@ -11,10 +11,9 @@ export default defineConfig({
       reporter: ['lcov', 'text-summary', 'text'],
       reportsDirectory: './coverage',
     },
-    reporters: ['default', 'vitest-sonar-reporter', 'junit'],
+    reporters: ['default', 'vitest-sonar-reporter'],
     outputFile: {
-      'vitest-sonar-reporter': 'test-results/sonar-report.xml',
-      junit: './test-results/junit.xml',
+      'vitest-sonar-reporter': 'test-results/sonar-report.xml'
     },
   },
 });

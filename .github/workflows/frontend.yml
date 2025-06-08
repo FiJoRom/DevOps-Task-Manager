@@ -114,6 +114,7 @@ jobs:
             git config --global user.name 'github-actions[bot]'
             git config --global user.email 'github-actions[bot]@users.noreply.github.com'
             git commit -m "Update frontend-version to $NEW_VERSION [skip ci]"
+            git pull --rebase origin $BRANCH_NAME
             git push origin $BRANCH_NAME --push-option=ci-skip
       
       - name: Build Docker image

@@ -116,6 +116,8 @@ jobs:
             git config --global user.email 'github-actions[bot]@users.noreply.github.com'
             git checkout $BRANCH_NAME
             git pull --rebase --autostash
+            echo "$NEW_VERSION" > frontend/version.txt
+            git add frontend/version.txt
             git commit -m "Update frontend-version to $NEW_VERSION [skip ci]"
             git push origin $BRANCH_NAME --push-option=ci-skip
 

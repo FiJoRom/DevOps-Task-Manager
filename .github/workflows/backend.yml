@@ -41,20 +41,20 @@ jobs:
 
       ### SonarQube ###
       # Version hinzufügen? Dafür müsste der Block nach vorne verschobene werden, der die Versionierung hochzählt 
-      #- name: SonarQube Scan
-      #  uses: SonarSource/sonarqube-scan-action@v4
-      #  with:
-      #    projectBaseDir: backend
-      #    wait: true
-      #  env:
-      #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACKEND }}
-      #    SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v4
+        with:
+          projectBaseDir: backend
+          wait: true
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACKEND }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
-      #- name: Quality Gate 
-      #  uses: SonarSource/sonarqube-quality-gate-action@v1
-      #  timeout-minutes: 5
-      #  env:
-      #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACKEND }}
+      - name: Quality Gate 
+        uses: SonarSource/sonarqube-quality-gate-action@v1
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACKEND }}
 
       ### Docker # Versionierungslogik ###
       - name: Set up Docker Buildx

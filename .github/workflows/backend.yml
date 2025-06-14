@@ -91,7 +91,7 @@ jobs:
           fi
 
           new_version="$major.$minor.$patch"
-          echo $new_version > "$VERSION_FILE"
+          echo $new_version > "$VERSION_FILE"f
           git add "$VERSION_FILE"
 
           echo "version=$new_version" >> $GITHUB_OUTPUT
@@ -117,9 +117,9 @@ jobs:
             git config --global user.email 'github-actions[bot]@users.noreply.github.com'
             git checkout $BRANCH_NAME
             git pull --rebase --autostash
-            echo "$NEW_VERSION" > frontend/version.txt
-            git add frontend/version.txt
-            git commit -m "Update frontend-version to $NEW_VERSION [skip ci]"
+            echo "$NEW_VERSION" > backend/version.txt
+            git add backend/version.txt
+            git commit -m "Update backend-version to $NEW_VERSION [skip ci]"
             git push origin $BRANCH_NAME --push-option=ci-skip
 
       - name: Build Docker image

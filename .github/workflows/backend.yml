@@ -131,9 +131,9 @@ jobs:
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/backend:${{ steps.increment_version.outputs.version }}
 
       - name: Tag and push latest
-          run: |
-            docker tag ${{ secrets.DOCKERHUB_USERNAME }}/backend:${{ steps.increment_version.outputs.version }} ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
-            docker push ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
+        run: |
+          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/backend:${{ steps.increment_version.outputs.version }} ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
 
       
 

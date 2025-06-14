@@ -123,10 +123,11 @@ jobs:
             git commit -m "Update frontend-version to $NEW_VERSION [skip ci]"
             git push origin $BRANCH_NAME --push-option=ci-skip
       
-      - name: Build Docker image
-        run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ steps.increment_version.outputs.version }} .
-
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ steps.increment_version.outputs.version }}
+
+      - name: Tag and push latest
+        run: |
+          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ steps.increment_version.outputs.version }} ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest

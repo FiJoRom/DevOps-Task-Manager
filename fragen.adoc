@@ -10,6 +10,8 @@
 
 ### Kein Vortrag
 
+### Docker Swarm im Deployment starten, damit Datenbank und so auch oben ist?
+
 ## Beantwortete Fragen
 
 ### Was ist eine sinnvolle Aufteilung für die Frontend/Backend Komponenten in den Workflows?

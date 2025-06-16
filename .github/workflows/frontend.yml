@@ -57,13 +57,12 @@ jobs:
           echo "Inhalt falls gefunden:"
           cat $(find . -name report-task.txt || echo "/dev/null")
 
-      - name: SonarQube Quality Gate
+      - name: Quality Gate
         uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
+        working-directory: frontend
+        timeout-minutes: 5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        with:
-          scanMetadataReportFile: .scannerwork/report-task.txt
 
       ### Docker + Versionierungslogik ###
       - name: Set up Docker Buildx

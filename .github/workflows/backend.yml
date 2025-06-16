@@ -49,8 +49,14 @@ jobs:
         with:
           projectBaseDir: backend
 
-      - name: Quality Gate 
-        uses: SonarSource/sonarqube-quality-gate-action@v1
+      - name: Check for report-task.txt
+        run: |
+          echo "Check for backend/.scannerwork/report-task.txt"
+          ls -l backend/.scannerwork || echo "Directory not found"
+          cat backend/.scannerwork/report-task.txt || echo "File not found"
+
+      - name: Quality Gate
+        run: bash $GITHUB_ACTION_PATH/script/check-quality-gate.sh backend/.scannerwork/report-task.txt
         timeout-minutes: 5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACKEND }}

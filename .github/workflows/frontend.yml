@@ -45,8 +45,6 @@ jobs:
       - name: SonarQube Scan
         id: sonar
         uses: SonarSource/sonarqube-scan-action@v4
-        with:
-          wait: true
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}

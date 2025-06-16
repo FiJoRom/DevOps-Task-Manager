@@ -43,8 +43,6 @@ jobs:
       # Version hinzufügen? Dafür müsste der Block nach vorne verschobene werden, der die Versionierung hochzählt 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v4
-        with:
-          wait: true
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACKEND }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}

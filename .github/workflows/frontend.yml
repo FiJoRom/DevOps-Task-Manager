@@ -50,18 +50,13 @@ jobs:
         with:
           projectBaseDir: frontend
       
-      - name: Check for SonarQube report-task.txt
-        run: |
-          echo "Suche nach report-task.txt..."
-          find . -name report-task.txt
-          echo "Inhalt falls gefunden:"
-          cat $(find . -name report-task.txt || echo "/dev/null")
-
-      - name: Quality Gate
+      - name: SonarQube Quality Gate
         uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
-        timeout-minutes: 5
+        with:
+          scanMetadataReportFile: frontend/.scannerwork/report-task.txt  ## wichtig, siehe Backend
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
       ### Docker + Versionierungslogik ###
       - name: Set up Docker Buildx

@@ -46,13 +46,31 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACKEND }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          projectBaseDir: backend
+
+      - name: Check for SonarQube report-task.txt
+        run: |
+          echo "Arbeitsverzeichnis: $(pwd)"
+          echo "Suche nach report-task.txt..."
+          files=$(find . -name report-task.txt)
+          echo "Gefundene Dateien:"
+          echo "$files"
+          if [ -n "$files" ]; then
+            echo "Inhalt der ersten report-task.txt:"
+            cat $(echo "$files" | head -n1)
+          else
+            echo "Keine report-task.txt gefunden."
+          fi
 
       - name: SonarQube Quality Gate
         uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
-        timeout-minutes: 5
+        with:
+          scanMetadataReportFile: backend/.scannerwork/report-task.txt
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACKEND }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
 
       ### Docker # Versionierungslogik ###
       - name: Set up Docker Buildx

@@ -49,17 +49,25 @@ jobs:
         with:
           projectBaseDir: backend
 
-      - name: Check for report-task.txt
+      - name: Check for SonarQube report-task.txt
         run: |
-          echo "Check for backend/.scannerwork/report-task.txt"
-          ls -l backend/.scannerwork || echo "Directory not found"
-          cat backend/.scannerwork/report-task.txt || echo "File not found"
+          echo "Arbeitsverzeichnis: $(pwd)"
+          echo "Suche nach report-task.txt..."
+          files=$(find . -name report-task.txt)
+          echo "Gefundene Dateien:"
+          echo "$files"
+          if [ -n "$files" ]; then
+            echo "Inhalt der ersten report-task.txt:"
+            cat $(echo "$files" | head -n1)
+          else
+            echo "Keine report-task.txt gefunden."
+          fi
 
       - name: Quality Gate
-        run: bash $GITHUB_ACTION_PATH/script/check-quality-gate.sh backend/.scannerwork/report-task.txt
+        uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
         timeout-minutes: 5
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACKEND }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
 
       ### Docker # Versionierungslogik ###
       - name: Set up Docker Buildx

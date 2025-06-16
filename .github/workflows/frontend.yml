@@ -59,7 +59,6 @@ jobs:
 
       - name: Quality Gate
         uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
-        working-directory: frontend
         timeout-minutes: 5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}

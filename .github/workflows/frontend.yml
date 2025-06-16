@@ -58,7 +58,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
-      ### Docker + Versionierungslogik ###
+      ### Docker Initalisierung + Login ###
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -68,6 +68,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      ### Versionierungslogik ###
       - name: Extract version
         id: increment_version
         run: |
@@ -124,7 +125,7 @@ jobs:
             git commit -m "Update frontend-version to $NEW_VERSION [skip ci]"
             git push origin $BRANCH_NAME --push-option=ci-skip
       
-
+      ### Docker build und push ###
       - name: Build Docker image
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ steps.increment_version.outputs.version }} .

@@ -35,23 +35,7 @@ services:
     depends_on:
       - backend
     restart: unless-stopped
-
-  nginx:
-    image: nginx:alpine
-    ports:
-      - "80:80"
-      - "443:443" # Für HTTPS
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/certs:/etc/nginx/certs # Für SSL-Zertifikate
-      - ./nginx/html:/usr/share/nginx/html
-    networks:
-      - backend-network
-    depends_on:
-      - frontend
-      - backend
-    restart: unless-stopped
-
+  
 volumes:
   pgdata:
 

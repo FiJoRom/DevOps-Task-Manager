@@ -8,6 +8,8 @@
 
 ### Was muss ich noch machen? Wie viel fake-Anwendung muss ich noch hinzufügen? (So viel für Testabdeckung x? Was ist mit ~60% erreichen, also 2/3 der Leistung? (Vortrag ausgeschlossen))
 
+### E2E Test?
+
 ### Kein Vortrag
 
 ### Docker Swarm im Deployment starten, damit Datenbank und so auch oben ist?

@@ -46,11 +46,17 @@ jobs:
         id: sonar
         uses: SonarSource/sonarqube-scan-action@v4
         with:
-          projectBaseDir: frontend
           wait: true
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      
+      - name: Check for SonarQube report-task.txt
+        run: |
+          echo "Suche nach report-task.txt..."
+          find . -name report-task.txt
+          echo "Inhalt falls gefunden:"
+          cat $(find . -name report-task.txt || echo "/dev/null")
 
       - name: Quality Gate
         uses: SonarSource/sonarqube-quality-gate-action@v1
@@ -59,6 +65,7 @@ jobs:
         timeout-minutes: 5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
+
       ### Docker + Versionierungslogik ###
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3

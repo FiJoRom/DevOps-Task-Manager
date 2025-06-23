@@ -41,7 +41,7 @@ jobs:
 
       ### SonarQube ###
       # Version hinzufügen? Dafür müsste der Block nach vorne verschobene werden, der die Versionierung hochzählt 
-      #
+      # Lieber nicht, Versionierung sollte ja wirklich erst nach Check erfolgen, dass es Qualität usw. erfüllt -> nach SonarQube
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v4
         env:

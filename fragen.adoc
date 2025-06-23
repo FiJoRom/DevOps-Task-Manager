@@ -1,19 +1,5 @@
 ## Offene Fragen
 
-### Ist die Alternative zur Testgeneriung in der Pipeline (inklusive Task usw.), die ich aktuell habe (Ausführen von Befehl, der sich auf Skript bezieht), okay für das Projekt? Gibt es da Vorteile/Nachteile?
-
-### Was gibt man denn alles weiter an SonarQube? Stichwort "Inklusive Ergebnisse aus vorherigen Schritten"
-
-### Gibt es eine bessere Alternative zu der Versionierung durch Update der File von Bot, die ich von meiner letzten eigenen Implementierung einer Versionierung übernommen + angepasst habe?
-
-### Was muss ich noch machen? Wie viel fake-Anwendung muss ich noch hinzufügen? (So viel für Testabdeckung x? Was ist mit ~60% erreichen, also 2/3 der Leistung? (Vortrag ausgeschlossen))
-
-### E2E Test?
-
-### Kein Vortrag
-
-### Docker Swarm im Deployment starten, damit Datenbank und so auch oben ist?
-
 ## Beantwortete Fragen
 
 ### Was ist eine sinnvolle Aufteilung für die Frontend/Backend Komponenten in den Workflows?
@@ -24,3 +10,33 @@ Continous Delivery ist der Prozess, bis es im Dockerhub landet, Continious Deplo
 
 ### ...
 Root vieler Probleme: Installation im falschen Verzeichnis ausgeführt
+
+### Ist die Alternative zur Testgeneriung in der Pipeline (inklusive Task usw.), die ich aktuell habe (Ausführen von Befehl, der sich auf Skript bezieht), okay für das Projekt? Gibt es da Vorteile/Nachteile?
+Ist okay, es müsste gar nicht immer inkrementiert werden im Patch
+patch eigentlich nur, wenn es wirklich nen fix auf produktivsystem gibt
+vierstelliges versioninng 
+vierte sache hash wert von commit oder so z.B., einfach für iteratives zählen
+git tags für versionierung wo es drin steht 
+
+### Was gibt man denn alles weiter an SonarQube? Stichwort "Inklusive Ergebnisse aus vorherigen Schritten"
+eslint übergeben (codebeispiel im gitlab/auf Folien)
+testreport selbst
+coverage report 
+
+### Alternative zu der Versionierung durch Update der File von Bot nötig?
+Nein, das passt so wie es gerade ist 
+
+### Was muss ich noch machen? Wie viel fake-Anwendung muss ich noch hinzufügen? (So viel für Testabdeckung x? Was ist mit ~60% erreichen, also 2/3 der Leistung? (Vortrag ausgeschlossen))
+3 units test im backend, die irgendwas machen (Coverage wichtig, sonarqube angezeigt)
+
+### E2E Test?
+... ist ja nur optimal, reicht für Teilgenommen auch ohne 
+
+### Kein Vortrag?
+doch, alle Leistungen sollten schon gemacht werden. 5-10min, nächste Woche kommen Folien dazu. 
+Besonders interessant sind Technologien, die wir noch nicht in der Vorlesung hatten
+(Bei der Länge ist es ja wirklich nur eine Zusammenfassung, was gemacht wird
+Vielleicht coolen Übersichtsgraphen mit Frontend + Backend Pipeline nebeneinander erstelle,
+als Pfeile, dazwischen die Steps zusammenfassen (und reinzoomen)
+Dann nochh die ...)
+Datum für Vortrag: 07.07

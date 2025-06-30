@@ -94,15 +94,18 @@ jobs:
           #  patch=$((patch + 1))
           #fi
 
-          if [[ "${{ github.event.head_commit.message }}" == *"release"* ]]; then
-          minor=$((minor + 1))
-          patch=0
-          echo "do_release=true" >> $GITHUB_OUTPUT
+          # Hole Commit-Message aus JSON
+          commit_message=$(jq -r .head_commit.message "$GITHUB_EVENT_PATH")
+
+          if [[ "$commit_message" == *"release"* || "$commit_message" == *"Release"* ]]; then
+            minor=$((minor + 1))
+            patch=0
+            echo "do_release=true" >> $GITHUB_OUTPUT
           else
             patch=$((patch + 1))
             echo "do_release=false" >> $GITHUB_OUTPUT
           fi
-          # r
+
 
           new_version="$major.$minor.$patch"
           echo $new_version > "$VERSION_FILE"

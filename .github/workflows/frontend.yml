@@ -155,11 +155,11 @@ jobs:
       - name: Package Docker image
         if: steps.increment_version.outputs.do_release == 'true'
         run: |
+          cd ..
           IMAGE="${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ steps.increment_version.outputs.version }}"
-          docker pull "$IMAGE" || true          # ist meist schon lokal
+          docker pull "$IMAGE"
           docker save "$IMAGE" -o frontend_${{ steps.increment_version.outputs.version }}.tar
-          zip frontend_${{ steps.increment_version.outputs.version }}.zip \
-              frontend_${{ steps.increment_version.outputs.version }}.tar
+          zip frontend_${{ steps.increment_version.outputs.version }}.zip frontend_${{ steps.increment_version.outputs.version }}.tar
 
       - name: Create GitHub Release
         if: steps.increment_version.outputs.do_release == 'true'

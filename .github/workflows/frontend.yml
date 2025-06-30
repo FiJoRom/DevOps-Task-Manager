@@ -86,12 +86,21 @@ jobs:
           minor=$(echo $version | cut -d. -f2)
           patch=$(echo $version | cut -d. -f3)
 
-          #Falls Commit-Message "release" enthält → minor +1, patch=0
+          # Falls Commit-Message "release" enthält → minor +1, patch=0
+          #if [[ "${{ github.event.head_commit.message }}" == *"release"* ]]; then
+          #  minor=$((minor + 1))
+          #  patch=0
+          #else
+          #  patch=$((patch + 1))
+          #fi
+
           if [[ "${{ github.event.head_commit.message }}" == *"release"* ]]; then
-           minor=$((minor + 1))
-           patch=0
+            minor=$((minor + 1))
+            patch=0
+            echo "do_release=true" >> $GITHUB_OUTPUT
           else
-           patch=$((patch + 1))
+            patch=$((patch + 1))
+            echo "do_release=false" >> $GITHUB_OUTPUT
           fi
 
 

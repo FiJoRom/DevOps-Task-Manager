@@ -102,6 +102,7 @@ jobs:
             patch=$((patch + 1))
             echo "do_release=false" >> $GITHUB_OUTPUT
           fi
+          # r
 
           new_version="$major.$minor.$patch"
           echo $new_version > "$VERSION_FILE"

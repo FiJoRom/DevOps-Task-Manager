@@ -149,16 +149,29 @@ jobs:
           docker tag ${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ steps.increment_version.outputs.version }} ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
 
-      ### Github Release 
+            # Docker-Image als ZIP verpacken
+      
+      ## Github 
+      - name: Package Docker image
+        if: steps.increment_version.outputs.do_release == 'true'
+        run: |
+          IMAGE="${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ steps.increment_version.outputs.version }}"
+          docker pull "$IMAGE" || true          # ist meist schon lokal
+          docker save "$IMAGE" -o frontend_${{ steps.increment_version.outputs.version }}.tar
+          zip frontend_${{ steps.increment_version.outputs.version }}.zip \
+              frontend_${{ steps.increment_version.outputs.version }}.tar
+
       - name: Create GitHub Release
         if: steps.increment_version.outputs.do_release == 'true'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: Frontend${{ steps.increment_version.outputs.version }}
-          name: Release Frontend${{ steps.increment_version.outputs.version }}
+          name: Release Frontend ${{ steps.increment_version.outputs.version }}
           body: |
             Automatisches Release aus CI
-          files: README.md
+          files: |
+            README.md
+            frontend_${{ steps.increment_version.outputs.version }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN_GITHUB }}
 

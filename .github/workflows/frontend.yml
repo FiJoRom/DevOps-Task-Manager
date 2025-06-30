@@ -69,6 +69,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       ### Versionierungslogik ###
+      ### test
       - name: Extract version
         id: increment_version
         run: |

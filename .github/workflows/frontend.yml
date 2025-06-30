@@ -161,15 +161,15 @@ jobs:
           docker save "$IMAGE" -o frontend_${{ steps.increment_version.outputs.version }}.tar
           zip frontend_${{ steps.increment_version.outputs.version }}.zip frontend_${{ steps.increment_version.outputs.version }}.tar
 
-      - name: Package Backend Docker image
+      - name: Package Backend Docker image (with matching version)
         if: steps.increment_version.outputs.do_release == 'true'
         working-directory: .
         run: |
+          BACKEND_VERSION=$(cat backend/version.txt)
           IMAGE="${{ secrets.DOCKERHUB_USERNAME }}/backend:latest"
           docker pull "$IMAGE"
-          docker save "$IMAGE" -o backend.tar
-          zip backend-image.zip backend.tar
-
+          docker save "$IMAGE" -o backend_${BACKEND_VERSION}.tar
+          zip backend_${BACKEND_VERSION}.zip backend_${BACKEND_VERSION}.tar
 
       - name: Create GitHub Release
         if: steps.increment_version.outputs.do_release == 'true'
@@ -182,7 +182,8 @@ jobs:
           files: |
             README.md
             frontend_${{ steps.increment_version.outputs.version }}.zip
-            backend-image.zip
+            backend_*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN_GITHUB }}
+
 

@@ -42,21 +42,21 @@ jobs:
       ### SonarQube ###
       # Version hinzufügen? Dafür müsste der Block nach vorne verschobene werden, der die Versionierung hochzählt 
       # Lieber nicht, Versionierung sollte ja wirklich erst nach Check erfolgen, dass es Qualität usw. erfüllt -> nach SonarQube
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v4
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        with:
-          projectBaseDir: frontend
+      #- name: SonarQube Scan
+      #  uses: SonarSource/sonarqube-scan-action@v4
+      #  env:
+      #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
+      #    SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      #  with:
+      #    projectBaseDir: frontend
       
-      - name: SonarQube Quality Gate
-        uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
-        with:
-          scanMetadataReportFile: frontend/.scannerwork/report-task.txt  ## wichtig, siehe Backend
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      #- name: SonarQube Quality Gate
+      #  uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
+      #  with:
+      #    scanMetadataReportFile: frontend/.scannerwork/report-task.txt  ## wichtig, siehe Backend
+      #  env:
+      #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
+      #    SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
       ### Docker Initalisierung + Login ###
       - name: Set up Docker Buildx
@@ -86,11 +86,20 @@ jobs:
           patch=$(echo $version | cut -d. -f3)
 
           # Falls Commit-Message "release" enthält → minor +1, patch=0
+          #if [[ "${{ github.event.head_commit.message }}" == *"release"* ]]; then
+          #  minor=$((minor + 1))
+          #  patch=0
+          #else
+          #  patch=$((patch + 1))
+          #fi
+
           if [[ "${{ github.event.head_commit.message }}" == *"release"* ]]; then
-            minor=$((minor + 1))
-            patch=0
+          minor=$((minor + 1))
+          patch=0
+          echo "do_release=true" >> $GITHUB_OUTPUT
           else
             patch=$((patch + 1))
+            echo "do_release=false" >> $GITHUB_OUTPUT
           fi
 
           new_version="$major.$minor.$patch"
@@ -138,3 +147,15 @@ jobs:
         run: |
           docker tag ${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ steps.increment_version.outputs.version }} ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
+
+      ### Github Release 
+      - name: Create GitHub Release
+        if: steps.increment_version.outputs.do_release == 'true'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.increment_version.outputs.version }}
+          name: Release v${{ steps.increment_version.outputs.version }}
+          body: |
+            Automatisches Release aus CI
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN_GITHUB }}

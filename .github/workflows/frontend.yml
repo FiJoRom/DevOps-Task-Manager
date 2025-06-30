@@ -103,7 +103,6 @@ jobs:
             echo "do_release=false" >> $GITHUB_OUTPUT
           fi
 
-
           new_version="$major.$minor.$patch"
           echo $new_version > "$VERSION_FILE"
           git add "$VERSION_FILE"
@@ -153,11 +152,12 @@ jobs:
       ### Github Release 
       - name: Create GitHub Release
         if: steps.increment_version.outputs.do_release == 'true'
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ steps.increment_version.outputs.version }}
-          name: Release v${{ steps.increment_version.outputs.version }}
+          tag_name: Frontend${{ steps.increment_version.outputs.version }}
+          name: Release Frontend${{ steps.increment_version.outputs.version }}
           body: |
             Automatisches Release aus CI
+          files: README.md
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN_GITHUB }}

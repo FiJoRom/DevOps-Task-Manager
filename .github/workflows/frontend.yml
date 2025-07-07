@@ -40,23 +40,23 @@ jobs:
         run: npm run test:coverage
 
       ### SonarQube ###
-      # Version hinzufügen? Dafür müsste der Block nach vorne verschobene werden, der die Versionierung hochzählt 
-      # Lieber nicht, Versionierung sollte ja wirklich erst nach Check erfolgen, dass es Qualität usw. erfüllt -> nach SonarQube
-      #- name: SonarQube Scan
-      #  uses: SonarSource/sonarqube-scan-action@v4
-      #  env:
-      #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
-      #    SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      #  with:
-      #    projectBaseDir: frontend
+      #Version hinzufügen? Dafür müsste der Block nach vorne verschobene werden, der die Versionierung hochzählt 
+      #Lieber nicht, Versionierung sollte ja wirklich erst nach Check erfolgen, dass es Qualität usw. erfüllt -> nach SonarQube
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          projectBaseDir: frontend
       
-      #- name: SonarQube Quality Gate
-      #  uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
-      #  with:
-      #    scanMetadataReportFile: frontend/.scannerwork/report-task.txt  ## wichtig, siehe Backend
-      #  env:
-      #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
-      #    SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      - name: SonarQube Quality Gate
+        uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
+        with:
+          scanMetadataReportFile: frontend/.scannerwork/report-task.txt  ## wichtig, siehe Backend
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
       ### Docker Initalisierung + Login ###
       - name: Set up Docker Buildx

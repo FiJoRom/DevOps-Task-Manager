@@ -3,6 +3,8 @@ import Fastify from 'fastify';
 import fastifyCors from '@fastify/cors';
 import { logicRoutes } from './routes/logicRoutes';
 
+//Release test
+
 const app = Fastify({ logger: true });
 
 app.register(fastifyCors, {

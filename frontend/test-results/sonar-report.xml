@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="src\components\TaskBoard.spec.tsx">
-    <testCase name="TaskBoard - rendert Spalten und Tasks" duration="194" />
-    <testCase name="TaskBoard - führt Status-Aktion aus (finish)" duration="69" />
+  <file path="src\App.spec.tsx">
+    <testCase name="App - zeigt erfolgreiche Ping-Antwort" duration="59" />
+    <testCase name="App - zeigt Fehlertext bei fehlgeschlagenem Ping" duration="8" />
+    <testCase name="App - erhöht den Counter beim Klick" duration="99" />
   </file>
-  <file path="src\example.test.ts">
-    <testCase name="Simple test - adds numbers" duration="2" />
+  <file path="src\components\TaskBoard.capacity.spec.tsx">
+    <testCase name="TaskBoard capacity &amp; assign - ändert Kapazität und ruft assign mit neuem Wert" duration="212" />
+  </file>
+  <file path="src\components\TaskBoard.spec.tsx">
+    <testCase name="TaskBoard - rendert Spalten und Tasks" duration="221" />
+    <testCase name="TaskBoard - führt Status-Aktion aus (finish)" duration="88" />
+  </file>
+  <file path="src\lib\tasks.api.spec.ts">
+    <testCase name="dummy API in tasks.ts - apiCreateTask + apiListTasks" duration="19" />
+    <testCase name="dummy API in tasks.ts - apiUpdateStatus führt State-Maschine aus" duration="5" />
+    <testCase name="dummy API in tasks.ts - apiAssignSprint respektiert Kapazität" duration="7" />
+  </file>
+  <file path="src\lib\tasks.edgecases.spec.ts">
+    <testCase name="tasks edge cases &amp; branches - computePriority clamped: high &amp; low" duration="4" />
+    <testCase name="tasks edge cases &amp; branches - nextStatus state machine" duration="1" />
+    <testCase name="tasks edge cases &amp; branches - progressSummary zählt korrekt inkl. overdue" duration="1" />
+    <testCase name="tasks edge cases &amp; branches - assignToSprint: Tiebreaker points → due → id" duration="2" />
+    <testCase name="tasks edge cases &amp; branches - validateTask wirft bei invalid status/points/due" duration="3" />
   </file>
   <file path="src\lib\tasks.spec.ts">
-    <testCase name="tasks utils - computePriority: urgent/bug erhöhen Score, done = 0" duration="2" />
+    <testCase name="tasks utils - computePriority: urgent/bug erhöhen Score, done = 0" duration="3" />
     <testCase name="tasks utils - progressSummary zählt Stati korrekt" duration="1" />
     <testCase name="tasks utils - assignToSprint respektiert Kapazität" duration="1" />
     <testCase name="tasks utils - idFromTitle ist deterministisch" duration="0" />

@@ -1,5 +1,11 @@
 # DevOps-Task-Manager
 
+## Setup
+Für die Replikation wird eine .env-File im Root benötigt, welche beispielhaft die folgenden drei Einträge umfassen sollte:
+- DB_USER=admin
+- DB_PASSWORD=admin
+- DB_NAME=taskmanager
+
 ## CI/CD 
 Das Projekt hat zwei CI/CD Pipelines, jeweils eine für das Backend und das Frontend der Anwendung. Beide Pipelines umfassen die folgenden Schritte:
 - [x] Build

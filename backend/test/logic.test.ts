@@ -43,7 +43,7 @@ describe('computePriority', () => {
   });
 
   it('validates input', () => {
-    expect(() => computePriority({} as any, now)).toThrow();
+    expect(() => computePriority(undefined as unknown as Task, now)).toThrow();
     expect(() => computePriority(t({ points: -1 }), now)).toThrow();
     expect(() => computePriority(t({ due: 'invalid-date' }), now)).toThrow();
   });

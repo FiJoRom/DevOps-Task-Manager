@@ -1,22 +1,26 @@
-import eslintPluginTs from '@typescript-eslint/eslint-plugin';
-import parserTs from '@typescript-eslint/parser';
+// Nur TS linten, JS/CJS & Build-Ordner ignorieren
+const tseslint = require('typescript-eslint');
+const globals = require('globals');
 
-export default [
+module.exports = [
+  { ignores: ['dist/**', 'coverage/**', 'node_modules/**', 'test-results/**', 'eslint.config.*', '**/*.cjs', '**/*.js'] },
+
+  // TS-Empfehlungen
+  ...tseslint.configs.recommended,
+
   {
     files: ['**/*.ts'],
     languageOptions: {
-      parser: parserTs,
+      parser: tseslint.parser,
       parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        project: './tsconfig.json',
+        //project: './tsconfig.eslint.json',
+        tsconfigRootDir: __dirname
       },
+      globals: globals.node
     },
-    plugins: {
-      '@typescript-eslint': eslintPluginTs,
-    },
+    plugins: { '@typescript-eslint': tseslint.plugin },
     rules: {
-      ...eslintPluginTs.configs.recommended.rules,
-    },
-  },
+      // eigene Regeln hier
+    }
+  }
 ];

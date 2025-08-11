@@ -2,6 +2,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, within } from '@testing-library/react';
 import TaskBoard from './TaskBoard';
+import type { Task } from '../lib/tasks';
 
 vi.mock('../lib/tasks', async () => {
   const actual = await vi.importActual<object>('../lib/tasks');
@@ -17,7 +18,7 @@ vi.mock('../lib/tasks', async () => {
       tasks[idx] = { ...tasks[idx], status: 'done' };
       return tasks[idx];
     }),
-    apiCreateTask: vi.fn(async (t: any) => ({ id: 't_new', ...t })),
+    apiCreateTask: vi.fn(async (t: Omit<Task, 'id'>) => ({ id: 't_new', ...t })),
     apiAssignSprint: vi.fn(async () => ({ selected: ['t1'], remaining: ['t2'] })),
   };
 });

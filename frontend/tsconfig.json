@@ -3,5 +3,15 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    "types": ["vitest/globals", "@testing-library/jest-dom"]
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/**/*.spec.*",
+    "src/**/*.test.*",
+    "src/setupTests.ts"
   ]
 }

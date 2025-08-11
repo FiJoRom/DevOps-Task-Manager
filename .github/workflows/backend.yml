@@ -49,21 +49,6 @@ jobs:
         with:
           projectBaseDir: backend
 
-      ## Schritt war notwendig, um hardcoded Filepath für nächsten Schritt zu identifizieren
-      #- name: Check for SonarQube report-task.txt
-      #  run: |
-      #    echo "Arbeitsverzeichnis: $(pwd)"
-      #    echo "Suche nach report-task.txt..."
-      #    files=$(find . -name report-task.txt)
-      #    echo "Gefundene Dateien:"
-      #    echo "$files"
-      #    if [ -n "$files" ]; then
-      #      echo "Inhalt der ersten report-task.txt:"
-      #      cat $(echo "$files" | head -n1)
-      #    else
-      #      echo "Keine report-task.txt gefunden."
-      #    fi
-
       - name: SonarQube Quality Gate
         uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
         with:

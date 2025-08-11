@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="1" failures="0" errors="0" time="0.936">
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2025-06-08T17:32:09" time="0.898" tests="1">
-    <testcase classname=" 1 + 1 = 2" name=" 1 + 1 = 2" time="0.002">
+<testsuites name="jest tests" tests="15" failures="0" errors="0" time="4.495">
+  <testsuite name="computePriority" errors="0" failures="0" skipped="0" timestamp="2025-08-11T05:45:43" time="2.718" tests="9">
+    <testcase classname="computePriority done -&gt; 0" name="computePriority done -&gt; 0" time="0.008">
+    </testcase>
+    <testcase classname="computePriority urgent/bug boost, blocked penalty, due branches" name="computePriority urgent/bug boost, blocked penalty, due branches" time="0.001">
+    </testcase>
+    <testcase classname="computePriority small tasks get slight boost; clamped 0..100" name="computePriority small tasks get slight boost; clamped 0..100" time="0">
+    </testcase>
+    <testcase classname="computePriority validates input" name="computePriority validates input" time="0.021">
+    </testcase>
+    <testcase classname="nextStatus transitions" name="nextStatus transitions" time="0">
+    </testcase>
+    <testcase classname="progressSummary counts correctly incl. overdue" name="progressSummary counts correctly incl. overdue" time="0.001">
+    </testcase>
+    <testcase classname="assignToSprint selects by priority until capacity" name="assignToSprint selects by priority until capacity" time="0.002">
+    </testcase>
+    <testcase classname="assignToSprint validates capacity" name="assignToSprint validates capacity" time="0">
+    </testcase>
+    <testcase classname="idFromTitle deterministic small hash" name="idFromTitle deterministic small hash" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="task-manager routes" errors="0" failures="0" skipped="0" timestamp="2025-08-11T05:45:43" time="3.757" tests="6">
+    <testcase classname="task-manager routes POST /api/task/priority" name="task-manager routes POST /api/task/priority" time="0.068">
+    </testcase>
+    <testcase classname="task-manager routes POST /api/task/next-status" name="task-manager routes POST /api/task/next-status" time="0.004">
+    </testcase>
+    <testcase classname="task-manager routes POST /api/tasks/summary" name="task-manager routes POST /api/tasks/summary" time="0.004">
+    </testcase>
+    <testcase classname="task-manager routes POST /api/sprint/assign" name="task-manager routes POST /api/sprint/assign" time="0.004">
+    </testcase>
+    <testcase classname="task-manager routes GET /api/task/id-from-title" name="task-manager routes GET /api/task/id-from-title" time="0.003">
+    </testcase>
+    <testcase classname="task-manager routes validates bad body" name="task-manager routes validates bad body" time="0.003">
     </testcase>
   </testsuite>
 </testsuites>

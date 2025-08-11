@@ -1,15 +1,13 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "type": "module",
-  "main": "index.js",
+  "main": "dist/server.js",
   "scripts": {
-    "dev": "ts-node src/index.ts",
+    "dev": "ts-node src/server.ts",
     "build": "tsc",
-    "lint": "eslint .",
+    "start": "node dist/server.js",
     "test": "jest",
-    "test:coverage": "jest --coverage",
-    "start": "node dist/index.js"
+    "test:coverage": "jest --coverage"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +17,8 @@
     "@fastify/cors": "^11.0.1",
     "fastify": "^5.3.3",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "zod": "^4.0.17"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",

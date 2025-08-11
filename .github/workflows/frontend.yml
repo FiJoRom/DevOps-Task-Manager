@@ -53,7 +53,7 @@ jobs:
       - name: SonarQube Quality Gate
         uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
         with:
-          scanMetadataReportFile: frontend/.scannerwork/report-task.txt  ## wichtig, siehe Backend
+          scanMetadataReportFile: frontend/.scannerwork/report-task.txt
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
@@ -69,7 +69,6 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       ### Versionierungslogik ###
-      ### test
       - name: Extract version
         id: increment_version
         run: |

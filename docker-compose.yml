@@ -30,6 +30,8 @@ services:
     build:
       context: ./frontend
       target: production
+      args:
+        VITE_API_URL: "http://localhost:3001"   # <— wichtig!
     ports:
       - "3000:80"
     networks:

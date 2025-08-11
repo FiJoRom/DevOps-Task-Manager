@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="src\components\TaskBoard.spec.tsx">
+    <testCase name="TaskBoard - rendert Spalten und Tasks" duration="194" />
+    <testCase name="TaskBoard - führt Status-Aktion aus (finish)" duration="69" />
+  </file>
+  <file path="src\example.test.ts">
+    <testCase name="Simple test - adds numbers" duration="2" />
+  </file>
+  <file path="src\lib\tasks.spec.ts">
+    <testCase name="tasks utils - computePriority: urgent/bug erhöhen Score, done = 0" duration="2" />
+    <testCase name="tasks utils - progressSummary zählt Stati korrekt" duration="1" />
+    <testCase name="tasks utils - assignToSprint respektiert Kapazität" duration="1" />
+    <testCase name="tasks utils - idFromTitle ist deterministisch" duration="0" />
+    <testCase name="tasks utils - validateTask wirft bei invalid points" duration="1" />
+  </file>
+</testExecutions>

@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react()],
   test: {
     environment: 'jsdom',
+    setupFiles: ['./src/setupTests.ts'],   // <— hinzugefügt
     coverage: {
       provider: 'v8',
       reporter: ['lcov', 'text-summary', 'text'],
@@ -13,7 +14,7 @@ export default defineConfig({
     },
     reporters: ['default', 'vitest-sonar-reporter'],
     outputFile: {
-      'vitest-sonar-reporter': 'test-results/sonar-report.xml'
+      'vitest-sonar-reporter': 'test-results/sonar-report.xml',
     },
   },
 });
